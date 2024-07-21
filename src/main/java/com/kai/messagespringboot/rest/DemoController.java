@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
 public class DemoController {
-    MessageService messageService;
+    private MessageService messageService;
 
     @Autowired
-    public DemoController(@Qualifier("emailService") MessageService messageService) {
+    public DemoController(@Qualifier("SMSService") MessageService messageService) {
         this.messageService = messageService;
     }
 
