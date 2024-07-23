@@ -1,22 +1,23 @@
 package com.kai.messagespringboot.rest;
 
-import com.kai.messagespringboot.common.Client;
-import com.kai.messagespringboot.common.EmailService;
-import com.kai.messagespringboot.common.SMSService;
+import com.kai.messagespringboot.common.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController()
 public class DemoController {
-    EmailService emailService = new EmailService();
-    SMSService smsService = new SMSService();
+    MessageService messageService;
 
-    Client newClient = new Client(smsService);
-    String result = newClient.sendMessage("Hello World");
+    @Autowired
+    public DemoController(@Qualifier("emailService") MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     @GetMapping("/send")
     public String send() {
-        return result;
+        return messageService.SendMessage("Hello ca nha iu");
     }
 }
