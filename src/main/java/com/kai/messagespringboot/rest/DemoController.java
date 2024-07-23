@@ -12,7 +12,7 @@ public class DemoController {
     private MessageService messageService;
 
     @Autowired
-    public DemoController(@Qualifier("SMSService") MessageService messageService) {
+    public void setMessageService(@Qualifier("SMSService") MessageService messageService) {
         this.messageService = messageService;
     }
 
